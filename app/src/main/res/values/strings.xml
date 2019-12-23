@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">CSBrvahBindingX</string>
+    <string-array name="animationsName">
+        <item>SlideBottom</item>
+        <item>Alphaln</item>
+        <item>Scaleln</item>
+        <item>SlideLeft</item>
+        <item>SlideRight</item>
+    </string-array>
+</resources>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.caesar.brvahbinding">
+
+    <application
+        android:name=".base.MyApp"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".loadmore.LoadMoreChatActivity"></activity>
+        <activity android:name=".loadmore.LoadMoreLineActivity" />
+        <activity android:name=".expand.ExpandActivity" />
+        <activity android:name=".swipe.SwipeActivity" />
+        <activity android:name=".drag.DragActivity" />
+        <activity android:name=".emptyrefreshview.EmptyRefreshActivity" />
+        <activity android:name=".headfoot.HeadFootActivity" />
+        <activity android:name=".nonMultiple.NonMultipleActivity" />
+        <activity android:name=".multiple.MultipleLineActivity" />
+        <activity android:name=".animation.AnimationCustomActivity" />
+        <activity android:name=".animation.AnimationActivity" />
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

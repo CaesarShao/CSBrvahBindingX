@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="vm"
+            type="com.caesar.brvahbinding.swipe.SwipeViewModel" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".swipe.SwipeActivity">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{vm.onBack}"
+            android:text="返回" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_show"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:cs_brvah_Decoration="@{vm.itemDecoration}"
+            app:cs_brvah_adapter="@{vm.bindingAdapter}"
+
+            />
+    </LinearLayout>
+</layout>

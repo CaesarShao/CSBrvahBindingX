@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="data"
+            type="com.caesar.brvahbinding.base.FetchErrorData" />
+
+        <variable
+            name="action"
+            type="com.caesarlib.brvahbinding.action.CSAction0" />
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_40"
+        android:onClick="@{()->action.call()}">
+
+
+        <TextView
+            android:id="@+id/tv_prompt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/brvah_load_failed"
+            android:textColor="#0dddb8" />
+
+
+    </FrameLayout>
+</layout>
