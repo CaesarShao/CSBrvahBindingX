@@ -18,6 +18,7 @@ import com.caesar.brvahbinding.loadmore.LoadMoreLineActivity;
 import com.caesar.brvahbinding.multiple.MultipleLineActivity;
 import com.caesar.brvahbinding.nonMultiple.NonMultipleActivity;
 import com.caesar.brvahbinding.swipe.SwipeActivity;
+import com.caesar.brvahbinding.twolist.TwoListActivity;
 import com.caesar.brvahbinding.usal.NormalLineDecoration;
 import com.caesarlib.brvahbinding.CSBravhItemBinding;
 import com.caesarlib.brvahbinding.action.CSAction1;
@@ -71,6 +72,7 @@ public class MainViewModel extends BaseBindingViewModel<MainData> {
                 data.add(new MainData("可扩展的,多布局", ExpandActivity.class));
                 data.add(new MainData("下拉刷新,上拉加载", LoadMoreLineActivity.class));
                 data.add(new MainData("聊天界面,下拉加载", LoadMoreChatActivity.class));
+                data.add(new MainData("2个列表的绑定,仿外卖", TwoListActivity.class));
                 emitter.onNext(data);
                 emitter.onComplete();
             }
