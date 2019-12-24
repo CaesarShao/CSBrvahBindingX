@@ -8,6 +8,7 @@ import com.caesar.brvahbinding.animation.AnimationActivity;
 import com.caesar.brvahbinding.animation.AnimationCustomActivity;
 import com.caesar.brvahbinding.base.BaseBindingViewModel;
 import com.caesar.brvahbinding.base.FramGroble;
+import com.caesar.brvahbinding.customadapter.CustomAdapterActivity;
 import com.caesar.brvahbinding.drag.DragActivity;
 import com.caesar.brvahbinding.emptyrefreshview.EmptyRefreshActivity;
 import com.caesar.brvahbinding.emptyrefreshview.EmptyRefrshViewModel;
@@ -73,6 +74,7 @@ public class MainViewModel extends BaseBindingViewModel<MainData> {
                 data.add(new MainData("下拉刷新,上拉加载", LoadMoreLineActivity.class));
                 data.add(new MainData("聊天界面,下拉加载", LoadMoreChatActivity.class));
                 data.add(new MainData("2个列表的绑定,仿外卖", TwoListActivity.class));
+                data.add(new MainData("用自己的适配器(继承万能适配器)", CustomAdapterActivity.class));
                 emitter.onNext(data);
                 emitter.onComplete();
             }

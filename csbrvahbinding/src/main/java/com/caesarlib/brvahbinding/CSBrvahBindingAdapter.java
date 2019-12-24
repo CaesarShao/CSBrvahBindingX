@@ -25,13 +25,13 @@ import java.util.ArrayList;
 public class CSBrvahBindingAdapter {
 
     @BindingAdapter(
-            value = {"cs_brvah_adapter", "cs_brvah_layoutManager", "cs_brvah_spansize", "cs_brvah_multiType", "cs_brvah_headBinding", "cs_brvah_footBinding", "cs_brvah_loadMoreListener", "cs_brvah_Decoration", "cs_brvah_animation_custom", "cs_brvah_loadMoreView", "cs_brvah_upFetchListener"},
+            value = {"cs_brvah_adapter", "cs_brvah_layoutManager", "cs_brvah_spansize", "cs_brvah_multiType", "cs_brvah_headBinding", "cs_brvah_footBinding", "cs_brvah_loadMoreListener", "cs_brvah_Decoration", "cs_brvah_animation_custom", "cs_brvah_loadMoreView", "cs_brvah_upFetchListener", "cs_brvah_animation"},
             requireAll = false
     )
-    public static <T> void setCSBravhAdapter(RecyclerView recyclerView, BaseQuickAdapter adapter, CSBrvahLayoutManager.LayoutManagerFactory layoutManager, BaseQuickAdapter.SpanSizeLookup spanSizeLookup, MultiTypeDelegate<T> multiTypeDelegate, ArrayList<CSBravhItemBinding> headBinding, ArrayList<CSBravhItemBinding> footBinding, BaseQuickAdapter.RequestLoadMoreListener loadMoreListener, RecyclerView.ItemDecoration itemDecoration, BaseAnimation animationCustom, LoadMoreView loadMoreView, BaseQuickAdapter.UpFetchListener upFetchListener) {
+    public static <T> void setCSBravhAdapter(RecyclerView recyclerView, BaseQuickAdapter adapter, CSBrvahLayoutManager.LayoutManagerFactory layoutManager, BaseQuickAdapter.SpanSizeLookup spanSizeLookup, MultiTypeDelegate<T> multiTypeDelegate, ArrayList<CSBravhItemBinding> headBinding, ArrayList<CSBravhItemBinding> footBinding, BaseQuickAdapter.RequestLoadMoreListener loadMoreListener, RecyclerView.ItemDecoration itemDecoration, BaseAnimation animationCustom, LoadMoreView loadMoreView, BaseQuickAdapter.UpFetchListener upFetchListener, ObservableInt animationType) {
 
         Adapter oldAdapter = recyclerView.getAdapter();
-        adapter = initAdapter(recyclerView, adapter, oldAdapter, spanSizeLookup, multiTypeDelegate, loadMoreListener, loadMoreView, upFetchListener);
+        adapter = initAdapter(recyclerView, adapter, oldAdapter, spanSizeLookup, multiTypeDelegate, itemDecoration, loadMoreListener, loadMoreView, upFetchListener, animationType);
         CSLog.Print("适配器是否为空:" + (adapter == null));
         Context context = recyclerView.getContext();
         if (layoutManager != null) {
@@ -61,9 +61,6 @@ public class CSBrvahBindingAdapter {
                 adapter.addFooterView(viewBinding.getRoot());
             }
         }
-        if (itemDecoration != null) {
-            recyclerView.addItemDecoration(itemDecoration);
-        }
         if (animationCustom != null) {
             adapter.openLoadAnimation(animationCustom);
         }
@@ -71,7 +68,7 @@ public class CSBrvahBindingAdapter {
     }
 
 
-    private static <T> BaseQuickAdapter initAdapter(RecyclerView recyclerView, BaseQuickAdapter adapter, Adapter oldAdapter, BaseQuickAdapter.SpanSizeLookup spanSizeLookup, MultiTypeDelegate<T> multiTypeDelegate, BaseQuickAdapter.RequestLoadMoreListener loadMoreListener, LoadMoreView loadMoreView, BaseQuickAdapter.UpFetchListener upFetchListener) {
+    private static <T> BaseQuickAdapter initAdapter(RecyclerView recyclerView, BaseQuickAdapter adapter, Adapter oldAdapter, BaseQuickAdapter.SpanSizeLookup spanSizeLookup, MultiTypeDelegate<T> multiTypeDelegate, RecyclerView.ItemDecoration itemDecoration, BaseQuickAdapter.RequestLoadMoreListener loadMoreListener, LoadMoreView loadMoreView, BaseQuickAdapter.UpFetchListener upFetchListener, ObservableInt animationType) {
 
 
         if (adapter == null) {
@@ -91,7 +88,6 @@ public class CSBrvahBindingAdapter {
             }
             if (loadMoreListener != null) {
                 adapter.setOnLoadMoreListener(loadMoreListener, recyclerView);
-//            adapter.disableLoadMoreIfNotFullPage();
             }
             if (multiTypeDelegate != null && (adapter instanceof CSItemBindingAdapter)) {
                 CSLog.Print("设置了multiTypeDelegate");
@@ -102,6 +98,12 @@ public class CSBrvahBindingAdapter {
             }
             if (upFetchListener != null) {
                 adapter.setUpFetchListener(upFetchListener);
+            }
+            if (animationType != null) {
+                adapter.openLoadAnimation(animationType.get());
+            }
+            if (recyclerView.getItemDecorationCount() == 0 && itemDecoration != null) {
+                recyclerView.addItemDecoration(itemDecoration);
             }
         }
 
@@ -159,18 +161,6 @@ public class CSBrvahBindingAdapter {
                 ((BaseQuickAdapter) adapter).getEmptyView().setOnClickListener(clickListener);
             }
 
-        }
-    }
-
-    @BindingAdapter(value = {"cs_brvah_animation"})
-    public static void onAnimationType(RecyclerView recyclerView, ObservableInt animationType) {
-        CSLog.Print("加载动画效果调用了");
-        RecyclerView.Adapter adapter = recyclerView.getAdapter();
-        if (adapter instanceof BaseQuickAdapter) {
-            CSLog.Print("进入加载动画效果");
-            if (animationType != null) {
-                ((BaseQuickAdapter) adapter).openLoadAnimation(animationType.get());
-            }
         }
     }
 
