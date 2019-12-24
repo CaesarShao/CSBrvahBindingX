@@ -11,7 +11,6 @@ import com.caesar.brvahbinding.base.FramGroble;
 import com.caesar.brvahbinding.customadapter.CustomAdapterActivity;
 import com.caesar.brvahbinding.drag.DragActivity;
 import com.caesar.brvahbinding.emptyrefreshview.EmptyRefreshActivity;
-import com.caesar.brvahbinding.emptyrefreshview.EmptyRefrshViewModel;
 import com.caesar.brvahbinding.expand.ExpandActivity;
 import com.caesar.brvahbinding.headfoot.HeadFootActivity;
 import com.caesar.brvahbinding.loadmore.LoadMoreChatActivity;
@@ -35,18 +34,20 @@ import io.reactivex.FlowableEmitter;
 import io.reactivex.FlowableOnSubscribe;
 
 public class MainViewModel extends BaseBindingViewModel<MainData> {
-    @Override
+
+    @Override//获取绑定的布局和数据,单布局写0即可,多布局,按照itemType写,可以看多布局的例子,对了,其中的bean和action,要跟布局里面命名的要一直
     protected Map<Integer, CSBravhItemBinding> getItemBinding() {
         Map<Integer, CSBravhItemBinding> mp = new HashMap<>();
         mp.put(0, new CSBravhItemBinding(BR.bean, R.layout.item_main, BR.action, new Action()));
         return mp;
     }
 
-    @Override
+    @Override//已经集成好的加载数据的方法
     public void load() {
         load(getData());
     }
 
+    //另外的点击事件动作,我为了方便这样写,也可以mvvm模式默认是写在data数据中
     public class Action implements CSAction1<MainData> {
 
         @Override
@@ -56,7 +57,7 @@ public class MainViewModel extends BaseBindingViewModel<MainData> {
         }
     }
 
-
+    //模拟网络请求的数据
     private Flowable<List<MainData>> getData() {
         return Flowable.create(new FlowableOnSubscribe<List<MainData>>() {
             @Override
@@ -81,7 +82,7 @@ public class MainViewModel extends BaseBindingViewModel<MainData> {
         }, BackpressureStrategy.BUFFER);
     }
 
-    @Override
+    @Override//设置自定义item的间距
     public RecyclerView.ItemDecoration onitemDecoration() {
         return new NormalLineDecoration(30, true);
     }

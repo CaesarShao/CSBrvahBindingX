@@ -112,6 +112,7 @@ public abstract class BaseBindingViewModel<B> extends BaseViewModel {
                 });
     }
 
+    //空布局的点击事件,里面做判断,如果当前空布局不是正在加载的状态,点击之后,就重新获取数据
     protected View.OnClickListener getEmptyOnClickListener() {
         return new View.OnClickListener() {
             @Override
@@ -195,6 +196,7 @@ public abstract class BaseBindingViewModel<B> extends BaseViewModel {
         return null;
     }
 
+    //下拉刷新控件的监听器,里面调用重新加载数据的方法
     public SwipeRefreshLayout.OnRefreshListener getRefreshListener() {
         return new SwipeRefreshLayout.OnRefreshListener() {
             @Override

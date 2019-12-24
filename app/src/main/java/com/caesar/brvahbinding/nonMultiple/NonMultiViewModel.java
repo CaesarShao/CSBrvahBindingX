@@ -7,7 +7,6 @@ import com.caesar.brvahbinding.R;
 import com.caesar.brvahbinding.base.BaseBindingViewModel;
 import com.caesar.brvahbinding.usal.NormaltemDecoration;
 import com.caesarlib.brvahbinding.CSBravhItemBinding;
-import com.caesarlib.brvahbinding.CSLog;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.util.MultiTypeDelegate;
 
@@ -22,10 +21,10 @@ import io.reactivex.FlowableEmitter;
 import io.reactivex.FlowableOnSubscribe;
 
 public class NonMultiViewModel extends BaseBindingViewModel<customData> {
-
+    //在构造方法中,设置SpanSizeLookup,这个是每个item占几格的回调.MultiTypeDelegat这个是itemType的回调判断了,如果不想继承MultiItemEntity的话
+    //就要由该回调来判断
     public NonMultiViewModel() {
         super();
-        CSLog.Print("构造方法调用了");
         setSpan(new BaseQuickAdapter.SpanSizeLookup() {
             @Override
             public int getSpanSize(GridLayoutManager gridLayoutManager, int i) {
@@ -40,7 +39,6 @@ public class NonMultiViewModel extends BaseBindingViewModel<customData> {
                 }
             }
         });
-
         setMultiTypeDelegat(new MultiTypeDelegate<customData>() {
             @Override
             protected int getItemType(customData customData) {
@@ -49,7 +47,7 @@ public class NonMultiViewModel extends BaseBindingViewModel<customData> {
         });
     }
 
-    @Override
+    @Override//这里面还是跟其他的一样
     protected Map<Integer, CSBravhItemBinding> getItemBinding() {
         Map<Integer, CSBravhItemBinding> mp = new HashMap<>();
         mp.put(0, new CSBravhItemBinding(com.caesar.brvahbinding.BR.data, R.layout.item_nomulti_zero));
@@ -61,7 +59,6 @@ public class NonMultiViewModel extends BaseBindingViewModel<customData> {
 
     @Override
     public void load() {
-        CSLog.Print("加载数据饿了");
         load(getData());
     }
 

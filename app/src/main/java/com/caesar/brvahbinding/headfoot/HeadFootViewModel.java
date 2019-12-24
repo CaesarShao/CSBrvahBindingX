@@ -23,7 +23,7 @@ public class HeadFootViewModel extends BaseBindingViewModel<SimpleData> {
         return mp;
     }
 
-    @Override
+    @Override//这个回调是头部的item的绑定数据,也支持绑定多个数据事件
     public ArrayList<CSBravhItemBinding> getHeadBinding() {
         ArrayList<CSBravhItemBinding> heads = new ArrayList<>();
         heads.add(new CSBravhItemBinding(BR.data, R.layout.layout_head_one, new HeadOneData(), BR.action, new brvah()));
@@ -31,7 +31,7 @@ public class HeadFootViewModel extends BaseBindingViewModel<SimpleData> {
         return heads;
     }
 
-    @Override
+    @Override//这个回调是脚部的item的绑定数据,也支持绑定多个数据事件
     public ArrayList<CSBravhItemBinding> getFootBinding() {
         ArrayList<CSBravhItemBinding> foots = new ArrayList<>();
         foots.add(new CSBravhItemBinding(BR.data, R.layout.layout_foot_one, new FootOneData()));
@@ -44,14 +44,13 @@ public class HeadFootViewModel extends BaseBindingViewModel<SimpleData> {
         load(CreateData.getSimpleData());
     }
 
-
     @Override
     public RecyclerView.ItemDecoration onitemDecoration() {
         return new NormalLineTopHeadDecoration(30, true);
     }
 
+    //某个头部绑定的事件,告诉大家可以这样调用
     public class brvah implements CSAction0 {
-
         @Override
         public void call() {
             bindingAdapter.removeAllHeaderView();

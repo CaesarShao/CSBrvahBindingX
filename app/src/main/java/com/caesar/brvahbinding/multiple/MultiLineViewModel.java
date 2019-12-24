@@ -19,7 +19,7 @@ import io.reactivex.FlowableEmitter;
 import io.reactivex.FlowableOnSubscribe;
 
 public class MultiLineViewModel extends BaseBindingViewModel<MultiItemEntity> {
-    @Override
+    @Override//多布局根据data的itemtype返回的值,将绑定类型的写上去
     protected Map<Integer, CSBravhItemBinding> getItemBinding() {
         Map<Integer, CSBravhItemBinding> mp = new HashMap<>();
         mp.put(0, new CSBravhItemBinding(com.caesar.brvahbinding.BR.data, R.layout.item_multi_zero));
@@ -32,7 +32,6 @@ public class MultiLineViewModel extends BaseBindingViewModel<MultiItemEntity> {
     public void load() {
         load(getData());
     }
-
 
     private Flowable<List<MultiItemEntity>> getData() {
         return Flowable.create(new FlowableOnSubscribe<List<MultiItemEntity>>() {
@@ -56,7 +55,6 @@ public class MultiLineViewModel extends BaseBindingViewModel<MultiItemEntity> {
             }
         }, BackpressureStrategy.BUFFER);
     }
-
 
     @Override
     public RecyclerView.ItemDecoration onitemDecoration() {

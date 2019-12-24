@@ -20,6 +20,7 @@ public class AnimationViewModel extends BaseBindingViewModel<SimpleData> {
 
     public AdapterView.OnItemSelectedListener onItemClickListener = getOnItemCli();
 
+    //构造方法,里面可以设置基础属性
     public AnimationViewModel() {
         super();
         //该viewmodel是演示效果,实际在构造方法中,直接调用即可,
@@ -38,9 +39,7 @@ public class AnimationViewModel extends BaseBindingViewModel<SimpleData> {
         load(CreateData.getSimpleData());
     }
 
-
-
-
+    //这个是Spinner控件的OnItemSelectedListener的监听,在布局中绑定,当spinner使用时,会回调这个方法.
     public AdapterView.OnItemSelectedListener getOnItemCli() {
         return new AdapterView.OnItemSelectedListener() {
 

@@ -16,8 +16,6 @@ import java.util.Map;
 
 public class AnimationCustomViewModel extends BaseBindingViewModel<SimpleData> {
 
-
-
     @Override
     protected Map<Integer, CSBravhItemBinding> getItemBinding() {
         Map<Integer, CSBravhItemBinding> mp = new HashMap<>();
@@ -30,15 +28,12 @@ public class AnimationCustomViewModel extends BaseBindingViewModel<SimpleData> {
         load(CreateData.getSimpleData());
     }
 
-
-
-
     @Override
     public RecyclerView.ItemDecoration onitemDecoration() {
         return new GridSpacingItemDecoration(2, 30, true);
     }
 
-    @Override
+    @Override//设置自定义动画
     public BaseAnimation onCustomAnimation() {
         return new CustomAnimation();
     }
