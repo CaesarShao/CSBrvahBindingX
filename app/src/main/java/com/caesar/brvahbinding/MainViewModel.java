@@ -9,6 +9,7 @@ import com.caesar.brvahbinding.animation.AnimationCustomActivity;
 import com.caesar.brvahbinding.base.BaseBindingViewModel;
 import com.caesar.brvahbinding.base.FramGroble;
 import com.caesar.brvahbinding.customadapter.CustomAdapterActivity;
+import com.caesar.brvahbinding.drag.DragASwipeActivity;
 import com.caesar.brvahbinding.drag.DragActivity;
 import com.caesar.brvahbinding.emptyrefreshview.EmptyRefreshActivity;
 import com.caesar.brvahbinding.expand.ExpandActivity;
@@ -71,6 +72,7 @@ public class MainViewModel extends BaseBindingViewModel<MainData> {
                 data.add(new MainData("空布局及下拉刷新", EmptyRefreshActivity.class));
                 data.add(new MainData("侧滑删除", SwipeActivity.class));
                 data.add(new MainData("长按拖动,多布局", DragActivity.class));
+                data.add(new MainData("侧滑删除长按拖动结合,多布局", DragASwipeActivity.class));
                 data.add(new MainData("可扩展的,多布局", ExpandActivity.class));
                 data.add(new MainData("下拉刷新,上拉加载", LoadMoreLineActivity.class));
                 data.add(new MainData("聊天界面,下拉加载", LoadMoreChatActivity.class));
