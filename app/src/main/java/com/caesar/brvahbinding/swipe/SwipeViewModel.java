@@ -39,7 +39,7 @@ public class SwipeViewModel extends BaseBindingViewModel<SimpleData> {
         return new NormalLineDecoration(30, true);
     }
 
-    @Override
+    @Override//只要重写这个监听器,然后再布局中绑定,就能侧滑删除
     public OnItemSwipeListener getItemSwipeListener() {
         return new OnItemSwipeListener() {
             @Override
@@ -63,7 +63,7 @@ public class SwipeViewModel extends BaseBindingViewModel<SimpleData> {
             }
         };
     }
-
+//这边是一个控制侧滑开关的例子,通过获取Controller()来控制,我已经在适配器中封装好了
     public void onSwi(View view) {
         if (isSwipe) {
             isSwipe = false;
@@ -74,7 +74,7 @@ public class SwipeViewModel extends BaseBindingViewModel<SimpleData> {
         }
     }
 
-    @Override
+    @Override//设置侧滑方向
     public int getOnSwipeMoveFrags() {
         return ItemTouchHelper.START | ItemTouchHelper.END;
     }

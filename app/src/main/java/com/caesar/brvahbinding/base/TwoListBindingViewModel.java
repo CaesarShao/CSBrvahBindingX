@@ -32,6 +32,7 @@ import io.reactivex.schedulers.Schedulers;
 public abstract class TwoListBindingViewModel<A,B> extends BaseViewModel {
 
 
+    //第一个列表的属性
 
     //数据集
     public ObservableArrayList<A> itemsA;
@@ -68,7 +69,7 @@ public abstract class TwoListBindingViewModel<A,B> extends BaseViewModel {
 
 
 
-
+    //第二个列表的属性
 
     //数据集
     public ObservableArrayList<B> itemsB;

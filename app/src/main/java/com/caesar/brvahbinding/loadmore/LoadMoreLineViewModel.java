@@ -23,9 +23,10 @@ import io.reactivex.FlowableOnSubscribe;
 public class LoadMoreLineViewModel extends LoadMoreBindingViewModel<SimpleData> {
     private boolean isFirst = true;
 
+    //构造方法中,设置每页获取的个数,这个值是用来判断当前网络请求,是否是最后一页的数据
     public LoadMoreLineViewModel() {
         super();
-        setPageSize(15);
+        setPageSize(10);
     }
 
     @Override
@@ -35,6 +36,7 @@ public class LoadMoreLineViewModel extends LoadMoreBindingViewModel<SimpleData> 
         return mp;
     }
 
+    //模拟加载数据,模拟加载成功/失败和结束
     @Override
     public void load(int mPage) {
         CSLog.Print("当前加载的页:" + mPage);
@@ -63,6 +65,11 @@ public class LoadMoreLineViewModel extends LoadMoreBindingViewModel<SimpleData> 
                 data.add(new SimpleData("这货是个标题", "这货是个内容加描述", R.mipmap.animation_img3));
                 data.add(new SimpleData("这货是个标题", "这货是个内容加描述", R.mipmap.animation_img2));
                 data.add(new SimpleData("这货是个标题", "这货是个内容加描述", R.mipmap.animation_img1));
+                data.add(new SimpleData("这货是个标题", "这货是个内容加描述", R.mipmap.animation_img3));
+                data.add(new SimpleData("这货是个标题", "这货是个内容加描述", R.mipmap.animation_img2));
+                data.add(new SimpleData("这货是个标题", "这货是个内容加描述", R.mipmap.animation_img1));
+                data.add(new SimpleData("这货是个标题", "这货是个内容加描述", R.mipmap.animation_img3));
+                data.add(new SimpleData("这货是个标题", "这货是个内容加描述", R.mipmap.animation_img2));
                 emitter.onNext(data);
                 emitter.onComplete();
             }

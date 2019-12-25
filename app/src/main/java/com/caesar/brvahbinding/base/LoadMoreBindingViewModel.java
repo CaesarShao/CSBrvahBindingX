@@ -1,7 +1,5 @@
 package com.caesar.brvahbinding.base;
 
-import android.util.Log;
-
 import androidx.databinding.ObservableBoolean;
 
 import com.caesar.brvahbinding.R;
@@ -19,13 +17,21 @@ import io.reactivex.schedulers.Schedulers;
 
 public abstract class LoadMoreBindingViewModel<B> extends BaseBindingViewModel<B> {
 
+    //加载更多布局,可以自定义
     public LoadMoreView loadMoreView;
+    //加载更多结束
     public ObservableBoolean loadMoreEnd;
+    //是否能够加载更多
     public ObservableBoolean loadMoreEnable;
+    //加载更多完成
     public ObservableBoolean loadMoreSuccess;
+    //上拉加载的监听回调
     public BaseQuickAdapter.RequestLoadMoreListener loadMoreListener;
+    //当前页数,默认从0开始,可以设置默认值
     public int mPage;
+    //每页加载返回的个数,按照这个来判断是否已经加到头了
     public int PageSize = 15;
+    //默认从第几页开始加载
     public int defaultStart;
 
     public LoadMoreBindingViewModel() {
@@ -121,13 +127,14 @@ public abstract class LoadMoreBindingViewModel<B> extends BaseBindingViewModel<B
                 });
     }
 
-
+    //重新加载,页数清空
     @Override
     public void reload() {
         mPage = defaultStart;
         super.reload();
     }
 
+    //设置默认从第几页开始加载
     public void setDefaultStart(int index) {
         defaultStart = index;
         mPage = index;

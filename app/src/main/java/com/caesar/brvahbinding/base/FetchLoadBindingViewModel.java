@@ -15,11 +15,14 @@ import io.reactivex.schedulers.Schedulers;
 
 public abstract class FetchLoadBindingViewModel<B> extends BaseBindingViewModel<B> {
 
+    //下拉监听回调
     public BaseQuickAdapter.UpFetchListener upFetchListener;
     public int mPage;
     public int PageSize = 15;
     public int defaultStart;
+    //其实就是一个item,我这边为了保证聊天数据结构完美,就写在这了,用户可以自己写,这边的item就是,聊天到头的item
     public FetchNomoreData fetchNomoreData = new FetchNomoreData();
+    //加载失败的item,跟上面的一样,也是一个itemType,也是要在绑定数据时,要加上这个类别,作用是加载失败时添加,点击之后,重新加载.
     public FetchErrorData fetchErrorData = new FetchErrorData();
 
 

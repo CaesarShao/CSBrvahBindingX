@@ -25,6 +25,7 @@ import io.reactivex.FlowableOnSubscribe;
 
 public class ExpandViewModel extends BaseBindingViewModel<MultiItemEntity> {
 
+    //构造器里,设置每个item的跨占格数
     public ExpandViewModel() {
         super();
         setSpan(new BaseQuickAdapter.SpanSizeLookup() {
@@ -53,11 +54,13 @@ public class ExpandViewModel extends BaseBindingViewModel<MultiItemEntity> {
         load(getData());
     }
 
+    //当每次数据加载完成的时候，都会回调该方法，我在这边，将列表展开
     @Override
     public void onDataLoadComplete() {
         bindingAdapter.expandAll();
     }
 
+    //模拟获取数据,这边的数据要继承AbstractExpandableItem
     private Flowable<List<MultiItemEntity>> getData() {
         return Flowable.create(new FlowableOnSubscribe<List<MultiItemEntity>>() {
             @Override
@@ -86,6 +89,7 @@ public class ExpandViewModel extends BaseBindingViewModel<MultiItemEntity> {
         return new NormaltemDecoration(10);
     }
 
+    //最外面item的点击事件,里面调用item的扩展和收缩.
     public class GrandAct implements CSAction1<ExDataGrandFa> {
 
         @Override
@@ -98,7 +102,7 @@ public class ExpandViewModel extends BaseBindingViewModel<MultiItemEntity> {
         }
     }
 
-
+    //第二个item的点击事件,调用里面item的扩展和说收缩
     public class FatherAct implements CSAction1<ExDataFather> {
 
         @Override
@@ -111,6 +115,7 @@ public class ExpandViewModel extends BaseBindingViewModel<MultiItemEntity> {
         }
     }
 
+    //最里面item的点击事件,将item从本列表中删除,记住有2个地方要删除,一个是items,第二个是它外层的item中的数据
     public class ChildAct implements CSAction1<ExDataChild> {
         @Override
         public void call(ExDataChild param) {
