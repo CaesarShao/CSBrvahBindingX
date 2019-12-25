@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="vm"
             type="com.caesar.brvahbinding.swipe.SwipeViewModel" />
@@ -16,11 +17,22 @@
         android:orientation="vertical"
         tools:context=".swipe.SwipeActivity">
 
-        <Button
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="@{vm.onBack}"
-            android:text="返回" />
+            android:layout_height="wrap_content">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{vm.onBack}"
+                android:text="返回" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{vm.onSwi}"
+                android:text="开关" />
+        </LinearLayout>
 
 
         <androidx.recyclerview.widget.RecyclerView
@@ -28,6 +40,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:cs_brvah_Decoration="@{vm.itemDecoration}"
+            app:cs_brvah_OnItemSwipeListener="@{vm.onItemSwipeListener}"
             app:cs_brvah_adapter="@{vm.bindingAdapter}"
 
             />

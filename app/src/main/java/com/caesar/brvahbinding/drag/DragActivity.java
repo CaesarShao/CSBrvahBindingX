@@ -15,7 +15,7 @@ public class DragActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_drag);
         ActivityDragBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_drag);
-        DragViewModel dragViewModel = new DragViewModel(binding.rvShow);
+        DragViewModel dragViewModel = new DragViewModel();
         binding.setVm(dragViewModel);
         dragViewModel.load();
     }

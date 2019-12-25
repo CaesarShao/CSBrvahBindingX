@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ObservableList;
 import androidx.databinding.ViewDataBinding;
+import androidx.recyclerview.widget.ItemTouchHelper;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -21,6 +22,7 @@ public abstract class CSItemBindingAdapter<T, V extends BaseViewHolder> extends 
     private Map<Integer, CSBravhItemBinding> bravhItemBinding;
     private MultiTypeDelegate multiTypeDelegate;
     private DraggableController mDraggableController;
+    private ItemTouchHelper itemTouchHelper;
 
     private CSBindingListChangedCallBack bindingListChangedCallBack;
 
@@ -97,5 +99,12 @@ public abstract class CSItemBindingAdapter<T, V extends BaseViewHolder> extends 
             mDraggableController = new DraggableController(this);
         }
         return mDraggableController;
+    }
+
+    public ItemTouchHelper getItemTouchHelper(ItemTouchHelper.Callback callback) {
+        if (itemTouchHelper == null) {
+            itemTouchHelper = new ItemTouchHelper(callback);
+        }
+        return itemTouchHelper;
     }
 }

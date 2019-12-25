@@ -12,11 +12,15 @@ import androidx.databinding.ObservableArrayList;
 import androidx.databinding.ObservableBoolean;
 import androidx.databinding.ObservableInt;
 import androidx.databinding.ViewDataBinding;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.Adapter;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.DraggableController;
 import com.chad.library.adapter.base.animation.BaseAnimation;
+import com.chad.library.adapter.base.listener.OnItemDragListener;
+import com.chad.library.adapter.base.listener.OnItemSwipeListener;
 import com.chad.library.adapter.base.loadmore.LoadMoreView;
 import com.chad.library.adapter.base.util.MultiTypeDelegate;
 
@@ -25,13 +29,13 @@ import java.util.ArrayList;
 public class CSBrvahBindingAdapter {
 
     @BindingAdapter(
-            value = {"cs_brvah_adapter", "cs_brvah_layoutManager", "cs_brvah_spansize", "cs_brvah_multiType", "cs_brvah_headBinding", "cs_brvah_footBinding", "cs_brvah_loadMoreListener", "cs_brvah_Decoration", "cs_brvah_animation_custom", "cs_brvah_loadMoreView", "cs_brvah_upFetchListener", "cs_brvah_animation"},
+            value = {"cs_brvah_adapter", "cs_brvah_layoutManager", "cs_brvah_spansize", "cs_brvah_multiType", "cs_brvah_headBinding", "cs_brvah_footBinding", "cs_brvah_loadMoreListener", "cs_brvah_Decoration", "cs_brvah_animation_custom", "cs_brvah_loadMoreView", "cs_brvah_upFetchListener", "cs_brvah_animation", "cs_brvah_OnItemSwipeListener", "cs_brvah_OnItemDragListener"},
             requireAll = false
     )
-    public static <T> void setCSBravhAdapter(RecyclerView recyclerView, BaseQuickAdapter adapter, CSBrvahLayoutManager.LayoutManagerFactory layoutManager, BaseQuickAdapter.SpanSizeLookup spanSizeLookup, MultiTypeDelegate<T> multiTypeDelegate, ArrayList<CSBravhItemBinding> headBinding, ArrayList<CSBravhItemBinding> footBinding, BaseQuickAdapter.RequestLoadMoreListener loadMoreListener, RecyclerView.ItemDecoration itemDecoration, BaseAnimation animationCustom, LoadMoreView loadMoreView, BaseQuickAdapter.UpFetchListener upFetchListener, ObservableInt animationType) {
+    public static <T> void setCSBravhAdapter(RecyclerView recyclerView, BaseQuickAdapter adapter, CSBrvahLayoutManager.LayoutManagerFactory layoutManager, BaseQuickAdapter.SpanSizeLookup spanSizeLookup, MultiTypeDelegate<T> multiTypeDelegate, ArrayList<CSBravhItemBinding> headBinding, ArrayList<CSBravhItemBinding> footBinding, BaseQuickAdapter.RequestLoadMoreListener loadMoreListener, RecyclerView.ItemDecoration itemDecoration, BaseAnimation animationCustom, LoadMoreView loadMoreView, BaseQuickAdapter.UpFetchListener upFetchListener, ObservableInt animationType, OnItemSwipeListener onItemSwipeListener, OnItemDragListener onItemDragListener) {
 
         Adapter oldAdapter = recyclerView.getAdapter();
-        adapter = initAdapter(recyclerView, adapter, oldAdapter, spanSizeLookup, multiTypeDelegate, itemDecoration, loadMoreListener, loadMoreView, upFetchListener, animationType,animationCustom);
+        adapter = initAdapter(recyclerView, adapter, oldAdapter, spanSizeLookup, multiTypeDelegate, itemDecoration, loadMoreListener, loadMoreView, upFetchListener, animationType, animationCustom, onItemSwipeListener, onItemDragListener);
         CSLog.Print("适配器是否为空:" + (adapter == null));
         Context context = recyclerView.getContext();
         if (layoutManager != null) {
@@ -64,7 +68,7 @@ public class CSBrvahBindingAdapter {
     }
 
 
-    private static <T> BaseQuickAdapter initAdapter(RecyclerView recyclerView, BaseQuickAdapter adapter, Adapter oldAdapter, BaseQuickAdapter.SpanSizeLookup spanSizeLookup, MultiTypeDelegate<T> multiTypeDelegate, RecyclerView.ItemDecoration itemDecoration, BaseQuickAdapter.RequestLoadMoreListener loadMoreListener, LoadMoreView loadMoreView, BaseQuickAdapter.UpFetchListener upFetchListener, ObservableInt animationType,BaseAnimation animationCustom) {
+    private static <T> BaseQuickAdapter initAdapter(RecyclerView recyclerView, BaseQuickAdapter adapter, Adapter oldAdapter, BaseQuickAdapter.SpanSizeLookup spanSizeLookup, MultiTypeDelegate<T> multiTypeDelegate, RecyclerView.ItemDecoration itemDecoration, BaseQuickAdapter.RequestLoadMoreListener loadMoreListener, LoadMoreView loadMoreView, BaseQuickAdapter.UpFetchListener upFetchListener, ObservableInt animationType, BaseAnimation animationCustom, OnItemSwipeListener onItemSwipeListener, OnItemDragListener onItemDragListener) {
 
 
         if (adapter == null) {
@@ -85,10 +89,6 @@ public class CSBrvahBindingAdapter {
             if (loadMoreListener != null) {
                 adapter.setOnLoadMoreListener(loadMoreListener, recyclerView);
             }
-            if (multiTypeDelegate != null && (adapter instanceof CSItemBindingAdapter)) {
-                CSLog.Print("设置了multiTypeDelegate");
-                ((CSItemBindingAdapter) adapter).setMultiTypeDelegate(multiTypeDelegate);
-            }
             if (loadMoreView != null) {
                 adapter.setLoadMoreView(loadMoreView);
             }
@@ -103,6 +103,33 @@ public class CSBrvahBindingAdapter {
             }
             if (animationCustom != null) {
                 adapter.openLoadAnimation(animationCustom);
+            }
+            if (adapter instanceof CSItemBindingAdapter) {
+                if (multiTypeDelegate != null) {
+                    CSLog.Print("设置了multiTypeDelegate");
+                    ((CSItemBindingAdapter) adapter).setMultiTypeDelegate(multiTypeDelegate);
+                }
+
+                if (onItemSwipeListener != null || onItemDragListener != null) {
+                    DraggableController draggableController = ((CSItemBindingAdapter) adapter).getDraggableController();
+                    CSDragAndSwipeCallBack itemDragAndSwipeCallback = new CSDragAndSwipeCallBack(draggableController);
+                    //这边是滑动功能,可以用系统的ItemDragAndSwipeCallback,如果是多布局拖动功能,并且想要不同type之间也可以拖动,要用CSDragAndSwipeCallBack
+//                    ItemTouchHelper itemTouchHelper = new ItemTouchHelper(itemDragAndSwipeCallback);
+                    ItemTouchHelper itemTouchHelper = ((CSItemBindingAdapter) adapter).getItemTouchHelper(itemDragAndSwipeCallback);
+                    itemTouchHelper.attachToRecyclerView(recyclerView);
+                    if (onItemSwipeListener != null) {
+                        CSLog.Print("设置了滑动删除监听");
+                        draggableController.enableSwipeItem();
+                        draggableController.setOnItemSwipeListener(onItemSwipeListener);
+                        itemDragAndSwipeCallback.setSwipeMoveFlags(ItemTouchHelper.START | ItemTouchHelper.END);
+                    }
+                    if (onItemDragListener != null) {
+                        CSLog.Print("设置了拖动监听");
+                        draggableController.setOnItemDragListener(onItemDragListener);
+                        draggableController.enableDragItem(itemTouchHelper);
+                    }
+                }
+
             }
         }
 

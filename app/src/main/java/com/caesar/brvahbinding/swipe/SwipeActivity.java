@@ -15,7 +15,7 @@ public class SwipeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_swipe);
         ActivitySwipeBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_swipe);
-        SwipeViewModel swipeViewModel = new SwipeViewModel(binding.rvShow);
+        SwipeViewModel swipeViewModel = new SwipeViewModel();
         binding.setVm(swipeViewModel);
         swipeViewModel.load();
     }

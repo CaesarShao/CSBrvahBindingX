@@ -18,11 +18,21 @@
         android:orientation="vertical"
         tools:context=".drag.DragActivity">
 
-        <Button
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="@{vm.onBack}"
-            android:text="返回" />
+            android:layout_height="wrap_content">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{vm.onBack}"
+                android:text="返回" />
+            <Button
+                android:onClick="@{vm.onSwi}"
+                android:text="开关"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
 
 
         <androidx.recyclerview.widget.RecyclerView
@@ -30,6 +40,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:cs_brvah_Decoration="@{vm.itemDecoration}"
+            app:cs_brvah_OnItemDragListener="@{vm.onItemDragListener}"
             app:cs_brvah_adapter="@{vm.bindingAdapter}"
             app:cs_brvah_layoutManager="@{CSBrvahLayoutManager.grid(4)}"
             app:cs_brvah_multiType="@{vm.multiTypeDelegat}"
