@@ -39,6 +39,7 @@
             android:id="@+id/rv_show"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            app:cs_brvah_SwipeMoveFrags="@{vm.swipeMoveFrags}"
             app:cs_brvah_Decoration="@{vm.itemDecoration}"
             app:cs_brvah_OnItemSwipeListener="@{vm.onItemSwipeListener}"
             app:cs_brvah_adapter="@{vm.bindingAdapter}"

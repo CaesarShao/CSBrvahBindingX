@@ -4,6 +4,7 @@ import android.graphics.Canvas;
 import android.view.View;
 
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.caesar.brvahbinding.R;
@@ -71,5 +72,10 @@ public class SwipeViewModel extends BaseBindingViewModel<SimpleData> {
             isSwipe = true;
             bindingAdapter.getDraggableController().enableSwipeItem();
         }
+    }
+
+    @Override
+    public int getOnSwipeMoveFrags() {
+        return ItemTouchHelper.START | ItemTouchHelper.END;
     }
 }

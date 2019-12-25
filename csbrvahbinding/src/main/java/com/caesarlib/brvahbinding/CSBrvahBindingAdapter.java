@@ -29,13 +29,13 @@ import java.util.ArrayList;
 public class CSBrvahBindingAdapter {
 
     @BindingAdapter(
-            value = {"cs_brvah_adapter", "cs_brvah_layoutManager", "cs_brvah_spansize", "cs_brvah_multiType", "cs_brvah_headBinding", "cs_brvah_footBinding", "cs_brvah_loadMoreListener", "cs_brvah_Decoration", "cs_brvah_animation_custom", "cs_brvah_loadMoreView", "cs_brvah_upFetchListener", "cs_brvah_animation", "cs_brvah_OnItemSwipeListener", "cs_brvah_OnItemDragListener"},
+            value = {"cs_brvah_adapter", "cs_brvah_layoutManager", "cs_brvah_spansize", "cs_brvah_multiType", "cs_brvah_headBinding", "cs_brvah_footBinding", "cs_brvah_loadMoreListener", "cs_brvah_Decoration", "cs_brvah_animation_custom", "cs_brvah_loadMoreView", "cs_brvah_upFetchListener", "cs_brvah_animation", "cs_brvah_OnItemSwipeListener", "cs_brvah_OnItemDragListener","cs_brvah_SwipeMoveFrags"},
             requireAll = false
     )
-    public static <T> void setCSBravhAdapter(RecyclerView recyclerView, BaseQuickAdapter adapter, CSBrvahLayoutManager.LayoutManagerFactory layoutManager, BaseQuickAdapter.SpanSizeLookup spanSizeLookup, MultiTypeDelegate<T> multiTypeDelegate, ArrayList<CSBravhItemBinding> headBinding, ArrayList<CSBravhItemBinding> footBinding, BaseQuickAdapter.RequestLoadMoreListener loadMoreListener, RecyclerView.ItemDecoration itemDecoration, BaseAnimation animationCustom, LoadMoreView loadMoreView, BaseQuickAdapter.UpFetchListener upFetchListener, ObservableInt animationType, OnItemSwipeListener onItemSwipeListener, OnItemDragListener onItemDragListener) {
+    public static <T> void setCSBravhAdapter(RecyclerView recyclerView, BaseQuickAdapter adapter, CSBrvahLayoutManager.LayoutManagerFactory layoutManager, BaseQuickAdapter.SpanSizeLookup spanSizeLookup, MultiTypeDelegate<T> multiTypeDelegate, ArrayList<CSBravhItemBinding> headBinding, ArrayList<CSBravhItemBinding> footBinding, BaseQuickAdapter.RequestLoadMoreListener loadMoreListener, RecyclerView.ItemDecoration itemDecoration, BaseAnimation animationCustom, LoadMoreView loadMoreView, BaseQuickAdapter.UpFetchListener upFetchListener, ObservableInt animationType, OnItemSwipeListener onItemSwipeListener, OnItemDragListener onItemDragListener,ObservableInt SwipeMoveFrags) {
 
         Adapter oldAdapter = recyclerView.getAdapter();
-        adapter = initAdapter(recyclerView, adapter, oldAdapter, spanSizeLookup, multiTypeDelegate, itemDecoration, loadMoreListener, loadMoreView, upFetchListener, animationType, animationCustom, onItemSwipeListener, onItemDragListener);
+        adapter = initAdapter(recyclerView, adapter, oldAdapter, spanSizeLookup, multiTypeDelegate, itemDecoration, loadMoreListener, loadMoreView, upFetchListener, animationType, animationCustom, onItemSwipeListener, onItemDragListener, SwipeMoveFrags);
         CSLog.Print("适配器是否为空:" + (adapter == null));
         Context context = recyclerView.getContext();
         if (layoutManager != null) {
@@ -68,7 +68,7 @@ public class CSBrvahBindingAdapter {
     }
 
 
-    private static <T> BaseQuickAdapter initAdapter(RecyclerView recyclerView, BaseQuickAdapter adapter, Adapter oldAdapter, BaseQuickAdapter.SpanSizeLookup spanSizeLookup, MultiTypeDelegate<T> multiTypeDelegate, RecyclerView.ItemDecoration itemDecoration, BaseQuickAdapter.RequestLoadMoreListener loadMoreListener, LoadMoreView loadMoreView, BaseQuickAdapter.UpFetchListener upFetchListener, ObservableInt animationType, BaseAnimation animationCustom, OnItemSwipeListener onItemSwipeListener, OnItemDragListener onItemDragListener) {
+    private static <T> BaseQuickAdapter initAdapter(RecyclerView recyclerView, BaseQuickAdapter adapter, Adapter oldAdapter, BaseQuickAdapter.SpanSizeLookup spanSizeLookup, MultiTypeDelegate<T> multiTypeDelegate, RecyclerView.ItemDecoration itemDecoration, BaseQuickAdapter.RequestLoadMoreListener loadMoreListener, LoadMoreView loadMoreView, BaseQuickAdapter.UpFetchListener upFetchListener, ObservableInt animationType, BaseAnimation animationCustom, OnItemSwipeListener onItemSwipeListener, OnItemDragListener onItemDragListener,ObservableInt SwipeMoveFrags) {
 
 
         if (adapter == null) {
@@ -121,7 +121,10 @@ public class CSBrvahBindingAdapter {
                         CSLog.Print("设置了滑动删除监听");
                         draggableController.enableSwipeItem();
                         draggableController.setOnItemSwipeListener(onItemSwipeListener);
-                        itemDragAndSwipeCallback.setSwipeMoveFlags(ItemTouchHelper.START | ItemTouchHelper.END);
+                        if (SwipeMoveFrags!=null){
+                            CSLog.Print("设置了侧滑方向");
+                            itemDragAndSwipeCallback.setSwipeMoveFlags(SwipeMoveFrags.get());
+                        }
                     }
                     if (onItemDragListener != null) {
                         CSLog.Print("设置了拖动监听");
