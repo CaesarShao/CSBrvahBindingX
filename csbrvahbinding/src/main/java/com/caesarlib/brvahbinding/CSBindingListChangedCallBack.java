@@ -25,9 +25,11 @@ public class CSBindingListChangedCallBack extends ObservableList.OnListChangedCa
     public void onItemRangeInserted(ObservableList sender, int positionStart, int itemCount) {
         CSLog.Print("Z-onItemRangeInserted:" + sender.size() + " sender.hashCode:" + sender.hashCode() + " positionStart:" + positionStart + " itemCount:" + itemCount + "  real itemCount:" + this.adapter.getItemCount());
         this.compatibilityDataSizeChanged(itemCount);
-//        if (positionStart != 0) {
-        this.adapter.notifyItemRangeInserted(positionStart + this.adapter.getHeaderLayoutCount(), itemCount);
-//        }
+        if (positionStart == 0) {
+            this.adapter.setNewData(sender);
+        }else {
+            this.adapter.notifyItemRangeInserted(positionStart + this.adapter.getHeaderLayoutCount(), itemCount);
+        }
 
     }
 

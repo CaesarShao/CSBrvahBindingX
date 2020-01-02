@@ -104,4 +104,8 @@ public class LoadMoreLineViewModel extends LoadMoreBindingViewModel<SimpleData> 
         return new NormalLineDecoration(30, true);
     }
 
+    public void doOne() {
+        loadMoreEnd.set(false);
+        loadMoreEnd.notifyChange();
+    }
 }

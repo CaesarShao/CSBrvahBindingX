@@ -131,6 +131,8 @@ public abstract class LoadMoreBindingViewModel<B> extends BaseBindingViewModel<B
     @Override
     public void reload() {
         mPage = defaultStart;
+        loadMoreEnd.set(false);
+        loadMoreEnable.set(false);
         super.reload();
     }
 
