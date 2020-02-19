@@ -2,7 +2,7 @@ package com.caesarlib.brvahbinding;
 
 import android.util.Log;
 
-public class CSLog {
+public class CSbrvahLog {
     private static boolean isOpen;
     private static boolean isI;
 

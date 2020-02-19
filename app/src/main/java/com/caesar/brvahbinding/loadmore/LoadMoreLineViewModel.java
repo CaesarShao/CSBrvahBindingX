@@ -7,7 +7,7 @@ import com.caesar.brvahbinding.base.LoadMoreBindingViewModel;
 import com.caesar.brvahbinding.usal.NormalLineDecoration;
 import com.caesar.brvahbinding.usal.SimpleData;
 import com.caesarlib.brvahbinding.CSBravhItemBinding;
-import com.caesarlib.brvahbinding.CSLog;
+import com.caesarlib.brvahbinding.CSbrvahLog;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -39,7 +39,7 @@ public class LoadMoreLineViewModel extends LoadMoreBindingViewModel<SimpleData> 
     //模拟加载数据,模拟加载成功/失败和结束
     @Override
     public void load(int mPage) {
-        CSLog.Print("当前加载的页:" + mPage);
+        CSbrvahLog.Print("当前加载的页:" + mPage);
         if (mPage == 2) {
             if (isFirst) {
                 isFirst = false;

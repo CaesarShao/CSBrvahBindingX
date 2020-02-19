@@ -10,8 +10,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".drag.DragASwipeActivity"></activity>
-        <activity android:name=".customadapter.CustomAdapterActivity"></activity>
+        <activity android:name=".horizontal.HorlzonActivity"></activity>
+        <activity android:name=".drag.DragASwipeActivity" />
+        <activity android:name=".customadapter.CustomAdapterActivity" />
         <activity android:name=".twolist.TwoListActivity" />
         <activity android:name=".loadmore.LoadMoreChatActivity" />
         <activity android:name=".loadmore.LoadMoreLineActivity" />

@@ -11,7 +11,7 @@ import com.caesar.brvahbinding.other.CreateData;
 import com.caesar.brvahbinding.usal.NormalLineDecoration;
 import com.caesar.brvahbinding.usal.SimpleData;
 import com.caesarlib.brvahbinding.CSBravhItemBinding;
-import com.caesarlib.brvahbinding.CSLog;
+import com.caesarlib.brvahbinding.CSbrvahLog;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -48,7 +48,7 @@ public class EmptyRefrshViewModel extends BaseBindingViewModel<SimpleData> {
     }
     //模拟数据返回为空
     public static Flowable<List<SimpleData>> getEmptyData() {
-        CSLog.Print("调用加载空布局");
+        CSbrvahLog.Print("调用加载空布局");
         return Flowable.create(new FlowableOnSubscribe<List<SimpleData>>() {
             @Override
             public void subscribe(FlowableEmitter<List<SimpleData>> emitter) throws Exception {
@@ -60,7 +60,7 @@ public class EmptyRefrshViewModel extends BaseBindingViewModel<SimpleData> {
     }
     //模拟网络请求出错
     public static Flowable<List<SimpleData>> getErrorData() {
-        CSLog.Print("调用加载错误");
+        CSbrvahLog.Print("调用加载错误");
         return Flowable.create(new FlowableOnSubscribe<List<SimpleData>>() {
             @Override
             public void subscribe(FlowableEmitter<List<SimpleData>> emitter) throws Exception {

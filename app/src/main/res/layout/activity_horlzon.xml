@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.caesar.brvahbinding.horizontal.HorlzonViewModel" />
+
+        <import type="com.caesarlib.brvahbinding.CSBrvahLayoutManager" />
+
+        <import type="androidx.recyclerview.widget.RecyclerView"/>
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".horizontal.HorlzonActivity">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{vm.onBack}"
+            android:text="返回" />
+
+        <TextView
+            android:text="横划就完事"
+            android:layout_margin="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:cs_brvah_Decoration="@{vm.itemDecoration}"
+            app:cs_brvah_adapter="@{vm.bindingAdapter}"
+            app:cs_brvah_layoutManager="@{CSBrvahLayoutManager.linear(RecyclerView.HORIZONTAL,false)}" />
+
+    </LinearLayout>
+</layout>

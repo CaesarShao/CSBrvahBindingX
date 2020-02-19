@@ -12,7 +12,7 @@ import com.caesar.brvahbinding.R;
 import com.caesarlib.brvahbinding.CSBindingAdapter;
 import com.caesarlib.brvahbinding.CSBravhItemBinding;
 import com.caesarlib.brvahbinding.CSItemBindingAdapter;
-import com.caesarlib.brvahbinding.CSLog;
+import com.caesarlib.brvahbinding.CSbrvahLog;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.chad.library.adapter.base.animation.BaseAnimation;
@@ -146,7 +146,7 @@ public abstract class TwoListBindingViewModel<A,B> extends BaseViewModel {
         if (isRefreshingA.get()) {
             emptyResIdA.set(getEmptyViewRes(EmptyViewType.REFRESH));
         } else {
-            CSLog.Print("调用了正在加载界面");
+            CSbrvahLog.Print("调用了正在加载界面");
             emptyResIdA.set(getEmptyViewRes(EmptyViewType.LOADING));
         }
         disposableA = flowable.observeOn(AndroidSchedulers.mainThread())
@@ -154,20 +154,20 @@ public abstract class TwoListBindingViewModel<A,B> extends BaseViewModel {
                 .subscribe(new Consumer<List<A>>() {
                     @Override
                     public void accept(List<A> bs) throws Exception {
-                        CSLog.Print("收到数据了");
+                        CSbrvahLog.Print("收到数据了");
                         addItemsA(bs);
                     }
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
-                        CSLog.Print("出现异常");
+                        CSbrvahLog.Print("出现异常");
                         emptyResIdA.set(getEmptyViewRes(EmptyViewType.ERROR));
                         isRefreshingA.set(false);
                     }
                 }, new Action() {
                     @Override
                     public void run() throws Exception {
-                        CSLog.Print("完成加载了");
+                        CSbrvahLog.Print("完成加载了");
                         emptyResIdA.set(getEmptyViewRes(EmptyViewType.EMPTY));
                         isRefreshingA.set(false);
                         onDataLoadCompleteA();
@@ -184,7 +184,7 @@ public abstract class TwoListBindingViewModel<A,B> extends BaseViewModel {
         if (isRefreshingB.get()) {
             emptyResIdB.set(getEmptyViewRes(EmptyViewType.REFRESH));
         } else {
-            CSLog.Print("调用了正在加载界面");
+            CSbrvahLog.Print("调用了正在加载界面");
             emptyResIdB.set(getEmptyViewRes(EmptyViewType.LOADING));
         }
         disposableB = flowable.observeOn(AndroidSchedulers.mainThread())
@@ -192,20 +192,20 @@ public abstract class TwoListBindingViewModel<A,B> extends BaseViewModel {
                 .subscribe(new Consumer<List<B>>() {
                     @Override
                     public void accept(List<B> bs) throws Exception {
-                        CSLog.Print("收到数据了");
+                        CSbrvahLog.Print("收到数据了");
                         addItemsB(bs);
                     }
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
-                        CSLog.Print("出现异常");
+                        CSbrvahLog.Print("出现异常");
                         emptyResIdB.set(getEmptyViewRes(EmptyViewType.ERROR));
                         isRefreshingB.set(false);
                     }
                 }, new Action() {
                     @Override
                     public void run() throws Exception {
-                        CSLog.Print("完成加载了");
+                        CSbrvahLog.Print("完成加载了");
                         emptyResIdB.set(getEmptyViewRes(EmptyViewType.EMPTY));
                         isRefreshingB.set(false);
                         onDataLoadCompleteB();
@@ -218,7 +218,7 @@ public abstract class TwoListBindingViewModel<A,B> extends BaseViewModel {
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CSLog.Print("点击了空布局按钮");
+                CSbrvahLog.Print("点击了空布局按钮");
                 if (emptyResIdA.get() != getEmptyViewRes(EmptyViewType.LOADING)) {
                     reloadA();
                     emptyResIdA.set(getEmptyViewRes(EmptyViewType.LOADING));
@@ -231,7 +231,7 @@ public abstract class TwoListBindingViewModel<A,B> extends BaseViewModel {
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CSLog.Print("点击了空布局按钮");
+                CSbrvahLog.Print("点击了空布局按钮");
                 if (emptyResIdB.get() != getEmptyViewRes(EmptyViewType.LOADING)) {
                     reloadB();
                     emptyResIdB.set(getEmptyViewRes(EmptyViewType.LOADING));

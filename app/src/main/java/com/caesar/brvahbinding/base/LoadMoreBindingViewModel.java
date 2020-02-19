@@ -3,7 +3,7 @@ package com.caesar.brvahbinding.base;
 import androidx.databinding.ObservableBoolean;
 
 import com.caesar.brvahbinding.R;
-import com.caesarlib.brvahbinding.CSLog;
+import com.caesarlib.brvahbinding.CSbrvahLog;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.loadmore.LoadMoreView;
 
@@ -79,7 +79,7 @@ public abstract class LoadMoreBindingViewModel<B> extends BaseBindingViewModel<B
 
 
     private void loadMore() {
-        CSLog.Print("加载更多调用了");
+        CSbrvahLog.Print("加载更多调用了");
         load();
     }
 
@@ -94,7 +94,7 @@ public abstract class LoadMoreBindingViewModel<B> extends BaseBindingViewModel<B
         if (isRefreshing.get()) {
             emptyResId.set(getEmptyViewRes(EmptyViewType.REFRESH));
         } else {
-            CSLog.Print("调用了正在加载界面");
+            CSbrvahLog.Print("调用了正在加载界面");
             emptyResId.set(getEmptyViewRes(EmptyViewType.LOADING));
         }
         disposable = flowable.observeOn(AndroidSchedulers.mainThread())

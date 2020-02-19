@@ -2,9 +2,6 @@ package com.caesar.brvahbinding.base
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
-import com.caesarlib.brvahbinding.CSLog
-import java.lang.ref.Reference
-import java.lang.ref.WeakReference
 
 /**
  * viewmodel的基类

@@ -12,7 +12,7 @@ import com.caesar.brvahbinding.R;
 import com.caesarlib.brvahbinding.CSBindingAdapter;
 import com.caesarlib.brvahbinding.CSBravhItemBinding;
 import com.caesarlib.brvahbinding.CSItemBindingAdapter;
-import com.caesarlib.brvahbinding.CSLog;
+import com.caesarlib.brvahbinding.CSbrvahLog;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.chad.library.adapter.base.animation.BaseAnimation;
@@ -94,7 +94,7 @@ public abstract class BaseBindingViewModel<B> extends BaseViewModel {
         if (isRefreshing.get()) {
             emptyResId.set(getEmptyViewRes(EmptyViewType.REFRESH));
         } else {
-            CSLog.Print("调用了正在加载界面");
+            CSbrvahLog.Print("调用了正在加载界面");
             emptyResId.set(getEmptyViewRes(EmptyViewType.LOADING));
         }
         disposable = flowable.observeOn(AndroidSchedulers.mainThread())
@@ -102,20 +102,20 @@ public abstract class BaseBindingViewModel<B> extends BaseViewModel {
                 .subscribe(new Consumer<List<B>>() {
                     @Override
                     public void accept(List<B> bs) throws Exception {
-                        CSLog.Print("收到数据了");
+                        CSbrvahLog.Print("收到数据了");
                         addItems(bs);
                     }
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
-                        CSLog.Print("出现异常");
+                        CSbrvahLog.Print("出现异常");
                         emptyResId.set(getEmptyViewRes(EmptyViewType.ERROR));
                         isRefreshing.set(false);
                     }
                 }, new Action() {
                     @Override
                     public void run() throws Exception {
-                        CSLog.Print("完成加载了");
+                        CSbrvahLog.Print("完成加载了");
                         emptyResId.set(getEmptyViewRes(EmptyViewType.EMPTY));
                         isRefreshing.set(false);
                         onDataLoadComplete();
@@ -128,7 +128,7 @@ public abstract class BaseBindingViewModel<B> extends BaseViewModel {
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CSLog.Print("点击了空布局按钮");
+                CSbrvahLog.Print("点击了空布局按钮");
                 if (emptyResId.get() != getEmptyViewRes(EmptyViewType.LOADING)) {
                     reload();
                     emptyResId.set(getEmptyViewRes(EmptyViewType.LOADING));

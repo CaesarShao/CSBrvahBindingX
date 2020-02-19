@@ -2,7 +2,7 @@ package com.caesar.brvahbinding.base;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.caesarlib.brvahbinding.CSLog;
+import com.caesarlib.brvahbinding.CSbrvahLog;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 
 import java.util.List;
@@ -40,7 +40,7 @@ public abstract class FetchLoadBindingViewModel<B> extends BaseBindingViewModel<
         return new BaseQuickAdapter.UpFetchListener() {
             @Override
             public void onUpFetch() {
-                CSLog.Print("下拉加载更多了");
+                CSbrvahLog.Print("下拉加载更多了");
                 loadMore();
             }
         };
@@ -48,7 +48,7 @@ public abstract class FetchLoadBindingViewModel<B> extends BaseBindingViewModel<
 
 
     private void loadMore() {
-        CSLog.Print("加载更多调用了");
+        CSbrvahLog.Print("加载更多调用了");
         load();
     }
 

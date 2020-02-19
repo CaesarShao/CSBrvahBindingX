@@ -14,6 +14,7 @@ import com.caesar.brvahbinding.drag.DragActivity;
 import com.caesar.brvahbinding.emptyrefreshview.EmptyRefreshActivity;
 import com.caesar.brvahbinding.expand.ExpandActivity;
 import com.caesar.brvahbinding.headfoot.HeadFootActivity;
+import com.caesar.brvahbinding.horizontal.HorlzonActivity;
 import com.caesar.brvahbinding.loadmore.LoadMoreChatActivity;
 import com.caesar.brvahbinding.loadmore.LoadMoreLineActivity;
 import com.caesar.brvahbinding.multiple.MultipleLineActivity;
@@ -78,6 +79,7 @@ public class MainViewModel extends BaseBindingViewModel<MainData> {
                 data.add(new MainData("聊天界面,下拉加载", LoadMoreChatActivity.class));
                 data.add(new MainData("2个列表的绑定,仿外卖", TwoListActivity.class));
                 data.add(new MainData("用自己的适配器(继承万能适配器)", CustomAdapterActivity.class));
+                data.add(new MainData("横向滑动的列表", HorlzonActivity.class));
                 emitter.onNext(data);
                 emitter.onComplete();
             }

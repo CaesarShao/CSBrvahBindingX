@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 
 import androidx.databinding.BindingAdapter;
 import androidx.databinding.DataBindingUtil;
-import androidx.databinding.ObservableArrayList;
 import androidx.databinding.ObservableBoolean;
 import androidx.databinding.ObservableInt;
 import androidx.databinding.ViewDataBinding;
@@ -36,7 +35,7 @@ public class CSBrvahBindingAdapter {
 
         Adapter oldAdapter = recyclerView.getAdapter();
         adapter = initAdapter(recyclerView, adapter, oldAdapter, spanSizeLookup, multiTypeDelegate, itemDecoration, loadMoreListener, loadMoreView, upFetchListener, animationType, animationCustom, onItemSwipeListener, onItemDragListener, SwipeMoveFrags);
-        CSLog.Print("适配器是否为空:" + (adapter == null));
+        CSbrvahLog.Print("适配器是否为空:" + (adapter == null));
         Context context = recyclerView.getContext();
         if (layoutManager != null) {
             recyclerView.setLayoutManager(layoutManager.create(recyclerView));
@@ -73,17 +72,17 @@ public class CSBrvahBindingAdapter {
 
         if (adapter == null) {
             if (oldAdapter != null) {
-                CSLog.Print("oldAdapter为空");
+                CSbrvahLog.Print("oldAdapter为空");
                 adapter = (BaseQuickAdapter) oldAdapter;
             } else {
-                CSLog.Print("oldAdapter不为空");
+                CSbrvahLog.Print("oldAdapter不为空");
             }
         } else {
-            CSLog.Print("Adapter不为空");
+            CSbrvahLog.Print("Adapter不为空");
         }
         if (adapter != null) {
             if (spanSizeLookup != null) {
-                CSLog.Print("设置了spanSizeLookup");
+                CSbrvahLog.Print("设置了spanSizeLookup");
                 adapter.setSpanSizeLookup(spanSizeLookup);
             }
             if (loadMoreListener != null) {
@@ -106,7 +105,7 @@ public class CSBrvahBindingAdapter {
             }
             if (adapter instanceof CSItemBindingAdapter) {
                 if (multiTypeDelegate != null) {
-                    CSLog.Print("设置了multiTypeDelegate");
+                    CSbrvahLog.Print("设置了multiTypeDelegate");
                     ((CSItemBindingAdapter) adapter).setMultiTypeDelegate(multiTypeDelegate);
                 }
 
@@ -118,16 +117,16 @@ public class CSBrvahBindingAdapter {
                     ItemTouchHelper itemTouchHelper = ((CSItemBindingAdapter) adapter).getItemTouchHelper(itemDragAndSwipeCallback);
                     itemTouchHelper.attachToRecyclerView(recyclerView);
                     if (onItemSwipeListener != null) {
-                        CSLog.Print("设置了滑动删除监听");
+                        CSbrvahLog.Print("设置了滑动删除监听");
                         draggableController.enableSwipeItem();
                         draggableController.setOnItemSwipeListener(onItemSwipeListener);
                         if (SwipeMoveFrags!=null){
-                            CSLog.Print("设置了侧滑方向");
+                            CSbrvahLog.Print("设置了侧滑方向");
                             itemDragAndSwipeCallback.setSwipeMoveFlags(SwipeMoveFrags.get());
                         }
                     }
                     if (onItemDragListener != null) {
-                        CSLog.Print("设置了拖动监听");
+                        CSbrvahLog.Print("设置了拖动监听");
                         draggableController.setOnItemDragListener(onItemDragListener);
                         draggableController.enableDragItem(itemTouchHelper);
                     }
@@ -143,30 +142,30 @@ public class CSBrvahBindingAdapter {
 
     @BindingAdapter(value = {"cs_brvah_loadMoreEnd"})
     public static void onLoadMoreEnd(RecyclerView recyclerView, ObservableBoolean loadMoreEnd) {
-        CSLog.Print("加载结束调用:" + loadMoreEnd.get());
+        CSbrvahLog.Print("加载结束调用:" + loadMoreEnd.get());
         RecyclerView.Adapter adapter = recyclerView.getAdapter();
         if (adapter instanceof BaseQuickAdapter) {
-            CSLog.Print("进入加载结束调用:" + loadMoreEnd.get());
+            CSbrvahLog.Print("进入加载结束调用:" + loadMoreEnd.get());
             ((BaseQuickAdapter) adapter).loadMoreEnd(loadMoreEnd.get());
         }
     }
 
     @BindingAdapter(value = {"cs_brvah_loadMoreEnable"})
     public static void onLoadMoreEnable(RecyclerView recyclerView, ObservableBoolean loadMoreEnable) {
-        CSLog.Print("是否加载更多:" + loadMoreEnable.get());
+        CSbrvahLog.Print("是否加载更多:" + loadMoreEnable.get());
         RecyclerView.Adapter adapter = recyclerView.getAdapter();
         if (adapter instanceof BaseQuickAdapter) {
-            CSLog.Print("进入是否加载更多:" + loadMoreEnable.get());
+            CSbrvahLog.Print("进入是否加载更多:" + loadMoreEnable.get());
             ((BaseQuickAdapter) adapter).setEnableLoadMore(loadMoreEnable.get());
         }
     }
 
     @BindingAdapter(value = {"cs_brvah_loadMoreSuccess"})
     public static void onLoadMoreSuccess(RecyclerView recyclerView, ObservableBoolean loadMoreSuccess) {
-        CSLog.Print("是否加载成功:" + loadMoreSuccess.get());
+        CSbrvahLog.Print("是否加载成功:" + loadMoreSuccess.get());
         RecyclerView.Adapter adapter = recyclerView.getAdapter();
         if (adapter instanceof BaseQuickAdapter) {
-            CSLog.Print("进入是否加载成功:" + loadMoreSuccess.get());
+            CSbrvahLog.Print("进入是否加载成功:" + loadMoreSuccess.get());
             if (loadMoreSuccess.get()) {
                 ((BaseQuickAdapter) adapter).loadMoreComplete();
             } else {
@@ -178,15 +177,15 @@ public class CSBrvahBindingAdapter {
 
     @BindingAdapter(value = {"cs_brvah_emptyResId", "cs_brvah_emptyClickListener"})
     public static void onEmptyView(RecyclerView recyclerView, ObservableInt emptyResId, View.OnClickListener clickListener) {
-        CSLog.Print("加载空布局调用");
+        CSbrvahLog.Print("加载空布局调用");
         RecyclerView.Adapter adapter = recyclerView.getAdapter();
         if (adapter instanceof BaseQuickAdapter) {
             if (emptyResId != null) {
-                CSLog.Print("进入加载空布局");
+                CSbrvahLog.Print("进入加载空布局");
                 ((BaseQuickAdapter) adapter).setEmptyView(emptyResId.get(), (ViewGroup) recyclerView.getParent());
             }
             if (clickListener != null && ((BaseQuickAdapter) adapter).getEmptyView() != null) {
-                CSLog.Print("进入加载空布局监听事件");
+                CSbrvahLog.Print("进入加载空布局监听事件");
                 ((BaseQuickAdapter) adapter).getEmptyView().setOnClickListener(clickListener);
             }
 

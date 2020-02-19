@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.caesar.brvahbinding.databinding.ActivityMainBinding
-import com.caesarlib.brvahbinding.CSLog
+import com.caesarlib.brvahbinding.CSbrvahLog
 
 class MainActivity : AppCompatActivity() {
 
@@ -14,6 +14,6 @@ class MainActivity : AppCompatActivity() {
         val model = MainViewModel()
         binding.vm = model
         model.load()
-        CSLog.Open()//测试用开启日志
+        CSbrvahLog.Open()//测试用开启日志
     }
 }
