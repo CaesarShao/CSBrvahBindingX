@@ -1,9 +1,9 @@
 package com.caesarlib.brvahbinding;
 
-public class CSBravhItemBinding<T> {
+public class CSBravhItemBinding {
     private int variableId;
     private int layoutRes;
-    private T headAFootData;
+    private Object headAFootData;
     private int actionId;
     private Object action;
 
@@ -12,7 +12,7 @@ public class CSBravhItemBinding<T> {
         this.layoutRes = layoutRes;
     }
 
-    public CSBravhItemBinding(int variableId, int layoutRes, T headAFootData) {
+    public CSBravhItemBinding(int variableId, int layoutRes, Object headAFootData) {
         this.variableId = variableId;
         this.layoutRes = layoutRes;
         this.headAFootData = headAFootData;
@@ -25,7 +25,7 @@ public class CSBravhItemBinding<T> {
         this.action = action;
     }
 
-    public CSBravhItemBinding(int variableId, int layoutRes, T headAFootData, int actionId, Object action) {
+    public CSBravhItemBinding(int variableId, int layoutRes, Object headAFootData, int actionId, Object action) {
         this.variableId = variableId;
         this.layoutRes = layoutRes;
         this.headAFootData = headAFootData;
@@ -33,11 +33,11 @@ public class CSBravhItemBinding<T> {
         this.action = action;
     }
 
-    public T getHeadAFootData() {
+    public Object getHeadAFootData() {
         return headAFootData;
     }
 
-    public void setHeadAFootData(T headAFootData) {
+    public void setHeadAFootData(Object headAFootData) {
         this.headAFootData = headAFootData;
     }
 
