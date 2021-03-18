@@ -22,6 +22,7 @@ public class HeadFootActivity extends AppCompatActivity {
 //不同用法,下面是kotlin用法
 
 
+
         ActivityHeadFootKotBinding bindingkot = DataBindingUtil.setContentView(this, R.layout.activity_head_foot_kot);
         HeadFootViewModelKot headFootViewModelkot = new HeadFootViewModelKot();
         bindingkot.setVm(headFootViewModelkot);
